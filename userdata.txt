@@ -4,15 +4,9 @@ set -e
 
 yum -y update python-boto
 
-FQDN="<your instance's FQDN>"
-export AWS_ACCESS_ID="<your AWS access key>"
-export AWS_SECRET_KEY="<your AWS secret key>"
-
-ec2_hostname=`curl -s http://169.254.169.254/latest/meta-data/public-hostname`.
-
-update_host.py $FQDN -c $ec2_hostname -t 60
-echo "Set cname $ec2_hostname for $FQDN"
-
+sed -i "s/<instance-FQDN>/<your instance's FQDN here>/" /etc/rc.local
+sed -i "s/<AWS-access-key>/<your AWS access key here>/" /etc/rc.local
+sed -i "s/<AWS-secret-key>/<your AWS secret key here>/" /etc/rc.local
 sed -i "s/#replSet=replicaSetName/<your replica set name>/" /etc/mongod.conf
 
-/etc/rc.d/init.d/mongod start
+chkconfig mongod on
