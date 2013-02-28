@@ -4,9 +4,9 @@ set -e
 
 yum -y update python-boto
 
-sed -i "s/<instance-FQDN>/<your instance's FQDN here>/" /etc/rc.local
-sed -i "s/<AWS-access-key>/<your AWS access key here>/" /etc/rc.local
-sed -i "s/<AWS-secret-key>/<your AWS secret key here>/" /etc/rc.local
+sed -i "s/FQDN_HERE/<your instance's FQDN here>/" /etc/rc.d/init.d/ec2-mongo-init
+sed -i "s/AWS_ACCESS_KEY_HERE/<your AWS access key here>/" /etc/rc.d/init.d/ec2-mongo-init
+sed -i "s/AWS_SECRET_KEY_HERE/<your AWS secret key here>/" /etc/rc.d/init.d/ec2-mongo-init
 sed -i "s/#replSet=replicaSetName/<your replica set name>/" /etc/mongod.conf
 
 chkconfig mongod on
